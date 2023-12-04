@@ -20,6 +20,7 @@ nest new .
 
 ##### [ swagger 사용 ]
 
+main.ts 파일에 코드 추가  
 npm install @nestjs/swagger@5 swagger-ui-express --save
 
 <br />
@@ -28,3 +29,10 @@ npm install @nestjs/swagger@5 swagger-ui-express --save
 
 typeorm.config.ts 파일 생성  
 npm install pg@8.7.1 typeorm@0.2.45 @nestjs/typeorm@8.0.1 --save
+
+<br/>
+
+##### [ firebase 사용 ]
+
+firebase.config.js 파일 생성  
+npm install firebase --save
