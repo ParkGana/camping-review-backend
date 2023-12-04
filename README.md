@@ -15,3 +15,9 @@ npm run start
 npm install -g @nestjs/cli@8.0  
 npm install typescript@4.7.4  
 nest new .
+
+<br />
+
+##### [ swagger 사용 ]
+
+npm install @nestjs/swagger@5 swagger-ui-express --save
