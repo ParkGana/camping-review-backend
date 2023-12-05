@@ -62,6 +62,22 @@ export class UserRepository extends Repository<UserEntity> {
     }
   }
 
+  /* 계정 정보 조회 */
+  async GetProfile(email: string): Promise<UserModel> {
+    const query = this.createQueryBuilder('user');
+
+    try {
+      const user = await query
+        .select()
+        .where('user.email = :userEmail', { userEmail: email })
+        .getOne();
+
+      return new UserModel(user);
+    } catch (error) {
+      generateError(error.message);
+    }
+  }
+
   /* 계정 연결 신청 */
   async RequestConnection(dto: ConnectionDTO): Promise<string> {
     const { sender, receiver } = dto;

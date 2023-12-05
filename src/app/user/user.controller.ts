@@ -1,4 +1,4 @@
-import { Controller, Body, Post } from '@nestjs/common';
+import { Controller, Body, Post, Get, Param } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { UserService } from './user.service';
 import { SignUpDTO } from 'src/dto/signup.dto';
@@ -23,6 +23,13 @@ export class UserController {
   @Post('/signin')
   SignIn(@Body() dto: SignInDTO): Promise<UserModel> {
     return this.userService.SignIn(dto);
+  }
+
+  /* 계정 정보 조회 */
+  @ApiOperation({ summary: '계정 정보 조회' })
+  @Get('/profile/:email')
+  GetProfile(@Param('email') email: string): Promise<UserModel> {
+    return this.userService.GetProfile(email);
   }
 
   /* 계정 연결 신청 */
