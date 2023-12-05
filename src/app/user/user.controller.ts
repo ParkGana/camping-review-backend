@@ -4,6 +4,7 @@ import { UserService } from './user.service';
 import { SignUpDTO } from 'src/dto/signup.dto';
 import { UserModel } from 'src/model/user.model';
 import { SignInDTO } from 'src/dto/signin.dto';
+import { ConnectionDTO } from 'src/dto/connection.dto';
 
 @ApiTags('USER')
 @Controller('user')
@@ -22,5 +23,19 @@ export class UserController {
   @Post('/signin')
   SignIn(@Body() dto: SignInDTO): Promise<UserModel> {
     return this.userService.SignIn(dto);
+  }
+
+  /* 계정 연결 신청 */
+  @ApiOperation({ summary: '계정 연결 신청' })
+  @Post('/connection/request')
+  RequestConnection(@Body() dto: ConnectionDTO): Promise<string> {
+    return this.userService.RequestConnection(dto);
+  }
+
+  /* 계정 연결 수락 */
+  @ApiOperation({ summary: '계정 연결 수락' })
+  @Post('/connection/response')
+  ResponseConnection(@Body() dto: ConnectionDTO): Promise<string> {
+    return this.userService.ResponseConnection(dto);
   }
 }

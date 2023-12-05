@@ -4,6 +4,7 @@ import { UserRepository } from './user.repository';
 import { SignUpDTO } from 'src/dto/signup.dto';
 import { UserModel } from 'src/model/user.model';
 import { SignInDTO } from 'src/dto/signin.dto';
+import { ConnectionDTO } from 'src/dto/connection.dto';
 
 @Injectable()
 export class UserService {
@@ -20,5 +21,15 @@ export class UserService {
   /* 로그인 */
   async SignIn(dto: SignInDTO): Promise<UserModel> {
     return this.userRepository.SignIn(dto);
+  }
+
+  /* 계정 연결 신청 */
+  async RequestConnection(dto: ConnectionDTO): Promise<string> {
+    return this.userRepository.RequestConnection(dto);
+  }
+
+  /* 계정 연결 수락 */
+  async ResponseConnection(dto: ConnectionDTO): Promise<string> {
+    return this.userRepository.ResponseConnection(dto);
   }
 }

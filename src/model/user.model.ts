@@ -11,6 +11,8 @@ export class UserModel extends PickType(UserEntity, [
     this.email = properties.email;
     this.name = properties.name;
     this.profileImage = properties.profileImage;
+    this.connectionEmail = properties.connectionEmail;
+    this.connectionState = properties.connectionState;
   }
 
   @ApiProperty()
@@ -21,4 +23,10 @@ export class UserModel extends PickType(UserEntity, [
 
   @ApiProperty()
   profileImage: string | null;
+
+  @ApiProperty()
+  connectionEmail: string | null;
+
+  @ApiProperty()
+  connectionState: string | null;
 }
