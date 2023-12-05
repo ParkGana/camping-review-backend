@@ -9,6 +9,10 @@ export const generateError = (message: string) => {
     case 'Firebase: Error (auth/email-already-in-use).':
       throw new UserException.AlreadyExist();
 
+    // 로그인
+    case 'Firebase: Error (auth/invalid-credential).':
+      throw new UserException.InvalidCredential();
+
     default:
       throw new Error('잠시 후 다시 시도해 주세요.');
   }
