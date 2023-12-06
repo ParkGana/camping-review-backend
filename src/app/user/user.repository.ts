@@ -4,6 +4,7 @@ import { EntityRepository, Repository } from 'typeorm';
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut,
 } from 'firebase/auth';
 import { auth } from '../../../firebase.config';
 import { UserModel } from 'src/model/user.model';
@@ -57,6 +58,17 @@ export class UserRepository extends Repository<UserEntity> {
         .getOne();
 
       return new UserModel(user);
+    } catch (error) {
+      generateError(error.message);
+    }
+  }
+
+  /* 로그아웃 */
+  async Logout(): Promise<string> {
+    try {
+      await signOut(auth);
+
+      return '로그아웃 완료';
     } catch (error) {
       generateError(error.message);
     }

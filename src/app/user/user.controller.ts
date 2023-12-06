@@ -25,6 +25,13 @@ export class UserController {
     return this.userService.SignIn(dto);
   }
 
+  /* 로그아웃 */
+  @ApiOperation({ summary: '로그아웃' })
+  @Post('/logout')
+  Logout(): Promise<string> {
+    return this.userService.Logout();
+  }
+
   /* 계정 정보 조회 */
   @ApiOperation({ summary: '계정 정보 조회' })
   @Get('/profile/:email')

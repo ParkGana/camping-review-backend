@@ -23,6 +23,11 @@ export class UserService {
     return this.userRepository.SignIn(dto);
   }
 
+  /* 로그아웃 */
+  async Logout(): Promise<string> {
+    return this.userRepository.Logout();
+  }
+
   /* 계정 정보 조회 */
   async GetProfile(email: string): Promise<UserModel> {
     return this.userRepository.GetProfile(email);
