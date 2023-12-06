@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CampsiteRepository } from './campsite.repository';
 import { CampsiteModel } from 'src/model/campsite.model';
+import { CreateCampsiteDTO } from 'src/dto/create-campsite.dto';
 import { UserRepository } from '../user/user.repository';
 import { UserModel } from 'src/model/user.model';
 
@@ -22,5 +23,10 @@ export class CampsiteService {
       email,
       new UserModel(profile).connectionEmail,
     );
+  }
+
+  /* 캠핑장 등록 */
+  async CreateCampsite(dto: CreateCampsiteDTO): Promise<string> {
+    return this.campsiteRepository.CreateCampsite(dto);
   }
 }

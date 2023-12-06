@@ -1,7 +1,8 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Post, Get, Param, Body } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { CampsiteService } from './campsite.service';
 import { CampsiteModel } from 'src/model/campsite.model';
+import { CreateCampsiteDTO } from 'src/dto/create-campsite.dto';
 
 @ApiTags('CAMPSITE')
 @Controller('campsite')
@@ -13,5 +14,12 @@ export class CampsiteController {
   @Get('/list/:email')
   GetCampsiteList(@Param('email') email: string): Promise<CampsiteModel[]> {
     return this.campsiteService.GetCampsiteList(email);
+  }
+
+  /* 캠핑장 등록 */
+  @ApiOperation({ summary: '캠핑장 등록' })
+  @Post('/create')
+  CreateCampsite(@Body() dto: CreateCampsiteDTO): Promise<string> {
+    return this.campsiteService.CreateCampsite(dto);
   }
 }
