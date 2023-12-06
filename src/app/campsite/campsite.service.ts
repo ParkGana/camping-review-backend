@@ -25,6 +25,11 @@ export class CampsiteService {
     );
   }
 
+  /* 캠핑장 정보 조회 */
+  async GetCampsiteDetail(id: string): Promise<CampsiteModel> {
+    return this.campsiteRepository.GetCampsiteDetail(id);
+  }
+
   /* 캠핑장 등록 */
   async CreateCampsite(dto: CreateCampsiteDTO): Promise<string> {
     return this.campsiteRepository.CreateCampsite(dto);

@@ -29,6 +29,22 @@ export class CampsiteRepository extends Repository<CampsiteEntity> {
     }
   }
 
+  /* 캠핑장 정보 조회 */
+  async GetCampsiteDetail(id: string): Promise<CampsiteModel> {
+    const query = this.createQueryBuilder('campsite');
+
+    try {
+      const campsite = await query
+        .innerJoinAndSelect('campsite.user', 'user')
+        .where('campsite.id = :campsiteId', { campsiteId: id })
+        .getOne();
+
+      return new CampsiteModel(campsite);
+    } catch (error) {
+      generateError(error.message);
+    }
+  }
+
   /* 캠프장 등록 */
   async CreateCampsite(dto: CreateCampsiteDTO): Promise<string> {
     const query = this.createQueryBuilder('campsite');

@@ -16,6 +16,13 @@ export class CampsiteController {
     return this.campsiteService.GetCampsiteList(email);
   }
 
+  /* 캠핑장 정보 조회 */
+  @ApiOperation({ summary: '캠핑장 정보 조회' })
+  @Get('/:id')
+  GetCampsiteDetail(@Param('id') id: string): Promise<CampsiteModel> {
+    return this.campsiteService.GetCampsiteDetail(id);
+  }
+
   /* 캠핑장 등록 */
   @ApiOperation({ summary: '캠핑장 등록' })
   @Post('/create')
