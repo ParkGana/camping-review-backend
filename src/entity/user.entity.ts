@@ -5,10 +5,12 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  OneToMany,
   PrimaryColumn,
   Unique,
   UpdateDateColumn,
 } from 'typeorm';
+import { CampsiteEntity } from './campsite.entity';
 
 @Entity('user')
 @Unique(['email'])
@@ -42,4 +44,9 @@ export class UserEntity extends BaseEntity {
 
   @Column({ nullable: true })
   connectionState: string | null;
+
+  @OneToMany(() => CampsiteEntity, (campsite) => campsite.user, {
+    eager: false,
+  })
+  campsites: CampsiteEntity[];
 }
