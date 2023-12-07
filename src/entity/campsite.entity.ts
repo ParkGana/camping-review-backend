@@ -16,15 +16,19 @@ export class CampsiteEntity extends DefaultEntity {
 
   @Column()
   @IsString()
-  feeling: string;
-
-  @Column()
-  @IsString()
   inTime: string;
 
   @Column()
   @IsString()
   outTime: string;
+
+  @Column()
+  @IsString()
+  type: string;
+
+  @Column()
+  @IsString()
+  feeling: string;
 
   @ManyToOne(() => UserEntity, (user) => user.campsites, {
     eager: true,

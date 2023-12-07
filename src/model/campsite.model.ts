@@ -6,18 +6,20 @@ export class CampsiteModel extends PickType(CampsiteEntity, [
   'id',
   'name',
   'address',
-  'feeling',
   'inTime',
   'outTime',
+  'type',
+  'feeling',
 ] as const) {
   constructor(properties: CampsiteModel) {
     super();
     this.id = properties.id;
     this.name = properties.name;
     this.address = properties.address;
-    this.feeling = properties.feeling;
     this.inTime = properties.inTime;
     this.outTime = properties.outTime;
+    this.type = properties.type;
+    this.feeling = properties.feeling;
     this.user = new UserModel(properties.user);
   }
 
@@ -31,13 +33,16 @@ export class CampsiteModel extends PickType(CampsiteEntity, [
   address: string;
 
   @ApiProperty()
-  feeling: string;
-
-  @ApiProperty()
   inTime: string;
 
   @ApiProperty()
   outTime: string;
+
+  @ApiProperty()
+  type: string;
+
+  @ApiProperty()
+  feeling: string;
 
   @ApiProperty()
   user: UserModel;

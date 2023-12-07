@@ -55,9 +55,10 @@ export class CampsiteRepository extends Repository<CampsiteEntity> {
         .values({
           name: dto.name,
           address: dto.address,
-          feeling: dto.feeling,
           inTime: dto.inTime,
           outTime: dto.outTime,
+          type: dto.type,
+          feeling: dto.feeling,
           user: { email: dto.userEmail },
         })
         .execute();

@@ -40,9 +40,11 @@ export class UserEntity extends BaseEntity {
   profileImage: string | null;
 
   @Column({ nullable: true })
+  @IsString()
   connectionEmail: string | null;
 
   @Column({ nullable: true })
+  @IsString()
   connectionState: string | null;
 
   @OneToMany(() => CampsiteEntity, (campsite) => campsite.user, {
