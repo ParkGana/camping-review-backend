@@ -2,9 +2,10 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CampsiteRepository } from './campsite.repository';
 import { CampsiteModel } from 'src/model/campsite.model';
-import { CreateCampsiteDTO } from 'src/dto/create-campsite.dto';
+import { CampsiteCreateDTO } from 'src/dto/campsite-create.dto';
 import { UserRepository } from '../user/user.repository';
 import { UserModel } from 'src/model/user.model';
+import { CampsiteUpdateDTO } from 'src/dto/campsite-update.dto';
 
 @Injectable()
 export class CampsiteService {
@@ -31,7 +32,12 @@ export class CampsiteService {
   }
 
   /* 캠핑장 등록 */
-  async CreateCampsite(dto: CreateCampsiteDTO): Promise<string> {
+  async CreateCampsite(dto: CampsiteCreateDTO): Promise<string> {
     return this.campsiteRepository.CreateCampsite(dto);
+  }
+
+  /* 캠핑장 수정 */
+  async UpdateCampsite(dto: CampsiteUpdateDTO): Promise<string> {
+    return this.campsiteRepository.UpdateCampsite(dto);
   }
 }

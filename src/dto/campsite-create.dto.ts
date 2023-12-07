@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class CreateCampsiteDTO {
+export class CampsiteCreateDTO {
   @ApiProperty({ default: '' })
   name: string;
 

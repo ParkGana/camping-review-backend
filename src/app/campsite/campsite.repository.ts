@@ -1,5 +1,6 @@
 import { generateError } from 'error.config';
-import { CreateCampsiteDTO } from 'src/dto/create-campsite.dto';
+import { CampsiteCreateDTO } from 'src/dto/campsite-create.dto';
+import { CampsiteUpdateDTO } from 'src/dto/campsite-update.dto';
 import { CampsiteEntity } from 'src/entity/campsite.entity';
 import { CampsiteModel } from 'src/model/campsite.model';
 import { EntityRepository, Repository } from 'typeorm';
@@ -46,7 +47,7 @@ export class CampsiteRepository extends Repository<CampsiteEntity> {
   }
 
   /* 캠프장 등록 */
-  async CreateCampsite(dto: CreateCampsiteDTO): Promise<string> {
+  async CreateCampsite(dto: CampsiteCreateDTO): Promise<string> {
     const query = this.createQueryBuilder('campsite');
 
     try {
@@ -64,6 +65,30 @@ export class CampsiteRepository extends Repository<CampsiteEntity> {
         .execute();
 
       return '캠핑장 등록 완료';
+    } catch (error) {
+      generateError(error.message);
+    }
+  }
+
+  /* 캠프장 등록 */
+  async UpdateCampsite(dto: CampsiteUpdateDTO): Promise<string> {
+    const query = this.createQueryBuilder('campsite');
+
+    try {
+      await query
+        .update()
+        .set({
+          name: dto.name,
+          address: dto.address,
+          inTime: dto.inTime,
+          outTime: dto.outTime,
+          type: dto.type,
+          feeling: dto.feeling,
+        })
+        .where('id = :campsiteId', { campsiteId: dto.campsiteId })
+        .execute();
+
+      return '캠핑장 수정 완료';
     } catch (error) {
       generateError(error.message);
     }
