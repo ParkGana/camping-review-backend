@@ -11,6 +11,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { CampsiteEntity } from './campsite.entity';
+import { CharacteristicEntity } from './characteristic.entity';
 
 @Entity('user')
 @Unique(['email'])
@@ -51,4 +52,13 @@ export class UserEntity extends BaseEntity {
     eager: false,
   })
   campsites: CampsiteEntity[];
+
+  @OneToMany(
+    () => CharacteristicEntity,
+    (characteristic) => characteristic.user,
+    {
+      eager: false,
+    },
+  )
+  characteristics: CampsiteEntity[];
 }
