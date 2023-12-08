@@ -1,4 +1,5 @@
 import { generateError } from 'error.config';
+import { CharacteristicCreateDTO } from 'src/dto/characteristic-create.dto';
 import { CharacteristicEntity } from 'src/entity/characteristic.entity';
 import { CharacteristicModel } from 'src/model/characteristic.model';
 import { EntityRepository, Repository } from 'typeorm';
@@ -23,6 +24,26 @@ export class CharacteristicRepository extends Repository<CharacteristicEntity> {
         .getMany();
 
       return characteristicList.map((v) => new CharacteristicModel(v));
+    } catch (error) {
+      generateError(error.message);
+    }
+  }
+
+  /* 특징 등록 */
+  async CreateCharacteristic(dto: CharacteristicCreateDTO): Promise<string> {
+    const query = this.createQueryBuilder('characteristic');
+
+    try {
+      await query
+        .insert()
+        .values({
+          type: dto.type,
+          contents: dto.contents,
+          user: { email: dto.userEmail },
+        })
+        .execute();
+
+      return '특징 등록 완료';
     } catch (error) {
       generateError(error.message);
     }

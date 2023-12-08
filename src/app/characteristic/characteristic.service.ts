@@ -4,6 +4,7 @@ import { CharacteristicRepository } from './characteristic.repository';
 import { UserRepository } from '../user/user.repository';
 import { CharacteristicModel } from 'src/model/characteristic.model';
 import { UserModel } from 'src/model/user.model';
+import { CharacteristicCreateDTO } from 'src/dto/characteristic-create.dto';
 
 @Injectable()
 export class CharacteristicService {
@@ -22,5 +23,10 @@ export class CharacteristicService {
       email,
       new UserModel(profile).connectionEmail,
     );
+  }
+
+  /* 특징 등록 */
+  async CreateCharacteristic(dto: CharacteristicCreateDTO): Promise<string> {
+    return this.characteristicRepository.CreateCharacteristic(dto);
   }
 }
