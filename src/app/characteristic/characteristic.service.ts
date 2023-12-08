@@ -29,4 +29,9 @@ export class CharacteristicService {
   async CreateCharacteristic(dto: CharacteristicCreateDTO): Promise<string> {
     return this.characteristicRepository.CreateCharacteristic(dto);
   }
+
+  /* 특징 삭제 */
+  async DeleteCharacteristic(characteristicId: string): Promise<string> {
+    return this.characteristicRepository.DeleteCharacteristic(characteristicId);
+  }
 }

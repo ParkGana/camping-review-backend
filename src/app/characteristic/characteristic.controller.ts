@@ -21,7 +21,14 @@ export class CharacteristicController {
   /* 특징 등록 */
   @ApiOperation({ summary: '특징 등록' })
   @Post('/create')
-  CreateCampsite(@Body() dto: CharacteristicCreateDTO): Promise<string> {
+  CreateCharacteristic(@Body() dto: CharacteristicCreateDTO): Promise<string> {
     return this.characteristicService.CreateCharacteristic(dto);
+  }
+
+  /* 특징 삭제 */
+  @ApiOperation({ summary: '특징 삭제' })
+  @Get('/delete/:id')
+  DeleteCharacteristic(@Param('id') id: string): Promise<string> {
+    return this.characteristicService.DeleteCharacteristic(id);
   }
 }

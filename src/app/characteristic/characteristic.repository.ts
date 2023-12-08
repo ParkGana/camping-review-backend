@@ -48,4 +48,20 @@ export class CharacteristicRepository extends Repository<CharacteristicEntity> {
       generateError(error.message);
     }
   }
+
+  /* 특징 삭제 */
+  async DeleteCharacteristic(characteristicId: string): Promise<string> {
+    const query = this.createQueryBuilder('characteristic');
+
+    try {
+      await query
+        .softDelete()
+        .where('id = :characteristicId', { characteristicId })
+        .execute();
+
+      return '특징 삭제 완료';
+    } catch (error) {
+      generateError(error.message);
+    }
+  }
 }
