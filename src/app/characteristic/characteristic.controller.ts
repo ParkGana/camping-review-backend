@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Param, Body } from '@nestjs/common';
+import { Controller, Get, Post, Param, Body, Delete } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { CharacteristicService } from './characteristic.service';
 import { CharacteristicModel } from 'src/model/characteristic.model';
@@ -27,7 +27,7 @@ export class CharacteristicController {
 
   /* 특징 삭제 */
   @ApiOperation({ summary: '특징 삭제' })
-  @Get('/delete/:id')
+  @Delete('/delete/:id')
   DeleteCharacteristic(@Param('id') id: string): Promise<string> {
     return this.characteristicService.DeleteCharacteristic(id);
   }

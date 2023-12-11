@@ -1,4 +1,4 @@
-import { Controller, Post, Get, Param, Body } from '@nestjs/common';
+import { Controller, Post, Get, Param, Body, Put } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { CampsiteService } from './campsite.service';
 import { CampsiteModel } from 'src/model/campsite.model';
@@ -33,7 +33,7 @@ export class CampsiteController {
 
   /* 캠핑장 수정 */
   @ApiOperation({ summary: '캠핑장 수정' })
-  @Post('/update')
+  @Put('/update')
   UpdateCampsite(@Body() dto: CampsiteUpdateDTO): Promise<string> {
     return this.campsiteService.UpdateCampsite(dto);
   }
