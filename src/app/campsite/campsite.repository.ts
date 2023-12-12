@@ -7,7 +7,7 @@ import { EntityRepository, Repository } from 'typeorm';
 
 @EntityRepository(CampsiteEntity)
 export class CampsiteRepository extends Repository<CampsiteEntity> {
-  /* 캠프장 목록 조회 */
+  /* 캠핑장 목록 조회 */
   async GetCampsiteList(
     email: string,
     connectionEmail: string,
@@ -46,7 +46,7 @@ export class CampsiteRepository extends Repository<CampsiteEntity> {
     }
   }
 
-  /* 캠프장 등록 */
+  /* 캠핑장 등록 */
   async CreateCampsite(dto: CampsiteCreateDTO): Promise<string> {
     const query = this.createQueryBuilder('campsite');
 
@@ -73,7 +73,7 @@ export class CampsiteRepository extends Repository<CampsiteEntity> {
     }
   }
 
-  /* 캠프장 수정 */
+  /* 캠핑장 수정 */
   async UpdateCampsite(dto: CampsiteUpdateDTO): Promise<string> {
     const query = this.createQueryBuilder('campsite');
 
@@ -92,6 +92,22 @@ export class CampsiteRepository extends Repository<CampsiteEntity> {
         .execute();
 
       return '캠핑장 수정 완료';
+    } catch (error) {
+      generateError(error.message);
+    }
+  }
+
+  /* 캠핑장 삭제 */
+  async DeleteCampsite(campsiteId: string): Promise<string> {
+    const query = this.createQueryBuilder('campsite');
+
+    try {
+      await query
+        .softDelete()
+        .where('id = :campsiteId', { campsiteId })
+        .execute();
+
+      return '캠핑장 삭제 완료';
     } catch (error) {
       generateError(error.message);
     }

@@ -1,4 +1,12 @@
-import { Controller, Post, Get, Param, Body, Put } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Get,
+  Param,
+  Body,
+  Put,
+  Delete,
+} from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { CampsiteService } from './campsite.service';
 import { CampsiteModel } from 'src/model/campsite.model';
@@ -36,5 +44,12 @@ export class CampsiteController {
   @Put('/update')
   UpdateCampsite(@Body() dto: CampsiteUpdateDTO): Promise<string> {
     return this.campsiteService.UpdateCampsite(dto);
+  }
+
+  /* 캠핑장 삭제 */
+  @ApiOperation({ summary: '캠핑장 삭제' })
+  @Delete('/delete/:id')
+  DeleteCampsite(@Param('id') id: string): Promise<string> {
+    return this.campsiteService.DeleteCampsite(id);
   }
 }

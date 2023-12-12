@@ -61,4 +61,9 @@ export class CampsiteService {
       characteristicIds: dto.characteristicIds,
     });
   }
+
+  /* 캠핑장 삭제 */
+  async DeleteCampsite(campsiteId: string): Promise<string> {
+    return this.campsiteRepository.DeleteCampsite(campsiteId);
+  }
 }
