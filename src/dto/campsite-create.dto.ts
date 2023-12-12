@@ -19,6 +19,9 @@ export class CampsiteCreateDTO {
   @ApiProperty({ default: '' })
   feeling: string;
 
+  @ApiProperty({ default: [] })
+  characteristicIds: string[];
+
   @ApiProperty({ default: '' })
   userEmail: string;
 }

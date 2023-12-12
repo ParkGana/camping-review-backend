@@ -51,26 +51,29 @@ export class CampsiteRepository extends Repository<CampsiteEntity> {
     const query = this.createQueryBuilder('campsite');
 
     try {
-      await query
-        .insert()
-        .values({
-          name: dto.name,
-          address: dto.address,
-          inTime: dto.inTime,
-          outTime: dto.outTime,
-          type: dto.type,
-          feeling: dto.feeling,
-          user: { email: dto.userEmail },
-        })
-        .execute();
+      const campsite = await (
+        await query
+          .insert()
+          .values({
+            name: dto.name,
+            address: dto.address,
+            inTime: dto.inTime,
+            outTime: dto.outTime,
+            type: dto.type,
+            feeling: dto.feeling,
+            user: { email: dto.userEmail },
+          })
+          .returning('*')
+          .execute()
+      ).raw[0];
 
-      return '캠핑장 등록 완료';
+      return campsite.id;
     } catch (error) {
       generateError(error.message);
     }
   }
 
-  /* 캠프장 등록 */
+  /* 캠프장 수정 */
   async UpdateCampsite(dto: CampsiteUpdateDTO): Promise<string> {
     const query = this.createQueryBuilder('campsite');
 

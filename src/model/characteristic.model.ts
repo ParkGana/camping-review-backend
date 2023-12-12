@@ -1,6 +1,5 @@
 import { ApiProperty, PickType } from '@nestjs/swagger';
 import { CharacteristicEntity } from 'src/entity/characteristic.entity';
-import { UserModel } from './user.model';
 
 export class CharacteristicModel extends PickType(CharacteristicEntity, [
   'id',
@@ -12,7 +11,6 @@ export class CharacteristicModel extends PickType(CharacteristicEntity, [
     this.id = properties.id;
     this.type = properties.type;
     this.contents = properties.contents;
-    this.user = new UserModel(properties.user);
   }
 
   @ApiProperty()
@@ -23,7 +21,4 @@ export class CharacteristicModel extends PickType(CharacteristicEntity, [
 
   @ApiProperty()
   contents: string;
-
-  @ApiProperty()
-  user: UserModel;
 }

@@ -19,6 +19,9 @@ export class CampsiteUpdateDTO {
   @ApiProperty({ default: '' })
   feeling: string;
 
+  @ApiProperty({ default: [] })
+  characteristicIds: string[];
+
   @ApiProperty({ default: '' })
   campsiteId: string;
 }

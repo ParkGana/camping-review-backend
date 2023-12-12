@@ -1,7 +1,8 @@
-import { Column, Entity, ManyToOne, Unique } from 'typeorm';
+import { Column, Entity, ManyToOne, OneToMany, Unique } from 'typeorm';
 import { DefaultEntity } from './default.entity';
 import { IsString } from 'class-validator';
 import { UserEntity } from './user.entity';
+import { CampsiteCharacteristicEntity } from './campsite-characteristic.entity';
 
 @Entity('campsite')
 @Unique(['name'])
@@ -34,4 +35,13 @@ export class CampsiteEntity extends DefaultEntity {
     eager: true,
   })
   user: UserEntity;
+
+  @OneToMany(
+    () => CampsiteCharacteristicEntity,
+    (campsiteCharacteristic) => campsiteCharacteristic.campsite,
+    {
+      eager: false,
+    },
+  )
+  connect: CampsiteCharacteristicEntity[];
 }

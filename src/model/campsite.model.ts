@@ -1,6 +1,5 @@
 import { ApiProperty, PickType } from '@nestjs/swagger';
 import { CampsiteEntity } from 'src/entity/campsite.entity';
-import { UserModel } from './user.model';
 
 export class CampsiteModel extends PickType(CampsiteEntity, [
   'id',
@@ -20,7 +19,6 @@ export class CampsiteModel extends PickType(CampsiteEntity, [
     this.outTime = properties.outTime;
     this.type = properties.type;
     this.feeling = properties.feeling;
-    this.user = new UserModel(properties.user);
   }
 
   @ApiProperty()
@@ -43,7 +41,4 @@ export class CampsiteModel extends PickType(CampsiteEntity, [
 
   @ApiProperty()
   feeling: string;
-
-  @ApiProperty()
-  user: UserModel;
 }

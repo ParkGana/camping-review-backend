@@ -6,12 +6,15 @@ import { CampsiteCreateDTO } from 'src/dto/campsite-create.dto';
 import { UserRepository } from '../user/user.repository';
 import { UserModel } from 'src/model/user.model';
 import { CampsiteUpdateDTO } from 'src/dto/campsite-update.dto';
+import { CampsiteCharacteristicRepository } from '../campsite-characteristic/campsite-characteristic.repository';
 
 @Injectable()
 export class CampsiteService {
   constructor(
     @InjectRepository(UserRepository)
     private userRepository: UserRepository,
+    @InjectRepository(CampsiteCharacteristicRepository)
+    private campsiteCharacteristicRepository: CampsiteCharacteristicRepository,
     @InjectRepository(CampsiteRepository)
     private campsiteRepository: CampsiteRepository,
   ) {}
@@ -33,11 +36,29 @@ export class CampsiteService {
 
   /* 캠핑장 등록 */
   async CreateCampsite(dto: CampsiteCreateDTO): Promise<string> {
-    return this.campsiteRepository.CreateCampsite(dto);
+    let campsiteId: string;
+
+    await this.campsiteRepository.CreateCampsite(dto).then((id) => {
+      campsiteId = id;
+    });
+
+    return this.campsiteCharacteristicRepository.ConnectCampsiteCharacteristic({
+      campsiteId,
+      characteristicIds: dto.characteristicIds,
+    });
   }
 
   /* 캠핑장 수정 */
   async UpdateCampsite(dto: CampsiteUpdateDTO): Promise<string> {
-    return this.campsiteRepository.UpdateCampsite(dto);
+    await this.campsiteRepository.UpdateCampsite(dto);
+
+    await this.campsiteCharacteristicRepository.UnconnectCampsiteCharacteristic(
+      dto.campsiteId,
+    );
+
+    return this.campsiteCharacteristicRepository.ConnectCampsiteCharacteristic({
+      campsiteId: dto.campsiteId,
+      characteristicIds: dto.characteristicIds,
+    });
   }
 }

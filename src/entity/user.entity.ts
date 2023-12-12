@@ -60,5 +60,5 @@ export class UserEntity extends BaseEntity {
       eager: false,
     },
   )
-  characteristics: CampsiteEntity[];
+  characteristics: CharacteristicEntity[];
 }
